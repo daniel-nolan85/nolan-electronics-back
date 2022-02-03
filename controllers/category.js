@@ -35,11 +35,25 @@ exports.update = async (req, res) => {
   }
 };
 
+// exports.remove = async (req, res) => {
+//   try {
+//     res.json(await Category.findOneAndDelete({ slug: req.params.slug }));
+//   } catch (err) {
+//     res.status(400).send('Delete category failed');
+//   }
+// };
+
+// also removes all subs on delete
 exports.remove = async (req, res) => {
   try {
+    const foundCat = await Category.findOne({ slug: req.params.slug });
+    await Sub.deleteMany({ parent: { $in: foundCat._id } }, function (err) {
+      console.log(err);
+    });
+
     res.json(await Category.findOneAndDelete({ slug: req.params.slug }));
   } catch (err) {
-    res.status(400).send('Delete category failed');
+    res.status(400).send('Category delete failed');
   }
 };
 

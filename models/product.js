@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      maxlength: 32,
+      maxlength: 50,
       text: true,
     },
     slug: {
@@ -52,11 +52,19 @@ const productSchema = new mongoose.Schema(
     },
     color: {
       type: String,
-      enum: ['Black', 'Brown', 'Silver', 'White', 'Blue'],
+      enum: ['Black', 'Silver', 'White', 'Blue', 'Rose Gold'],
     },
     brand: {
       type: String,
-      enum: ['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'Asus'],
+      enum: [
+        'Apple',
+        'Samsung',
+        'Microsoft',
+        'Lenovo',
+        'Asus',
+        'Dell',
+        'Hewlett Packard',
+      ],
     },
     ratings: [
       {
